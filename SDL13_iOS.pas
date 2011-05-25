@@ -54,6 +54,21 @@ const
 	SDL_INIT_EVERYTHING  = $0000FFFF;
   // End SDL.h
 
+  // Begin SDL_video.h (Constants)
+  SDL_WINDOW_FULLSCREEN = $00000001;         //**< fullscreen window */
+  SDL_WINDOW_OPENGL = $00000002;             //**< window usable with OpenGL context */
+  SDL_WINDOW_SHOWN = $00000004;              //**< window is visible */
+  SDL_WINDOW_HIDDEN = $00000008;             //**< window is not visible */
+  SDL_WINDOW_BORDERLESS = $00000010;         //**< no window decoration */
+  SDL_WINDOW_RESIZABLE = $00000020;          //**< window can be resized */
+  SDL_WINDOW_MINIMIZED = $00000040;          //**< window is minimized */
+  SDL_WINDOW_MAXIMIZED = $00000080;          //**< window is maximized */
+  SDL_WINDOW_INPUT_GRABBED = $00000100;      //**< window has grabbed input focus */
+  SDL_WINDOW_INPUT_FOCUS = $00000200;        //**< window has input focus */
+  SDL_WINDOW_MOUSE_FOCUS = $00000400;        //**< window has mouse focus */
+  SDL_WINDOW_FOREIGN = $00000800;             //**< window not created by SDL */
+  // End SDL_video.h
+
 // SDL_types.h constants
 
   SDL_PRESSED = $01;
@@ -164,7 +179,7 @@ const
 	AMask = $000000FF;
 {$ENDIF}
 
-  // SDL_WindowFlags (enum)
+  (*// SDL_WindowFlags (enum)
   SDL_WINDOW_FULLSCREEN = $00000001;         //*< fullscreen window, implies borderless */
   SDL_WINDOW_OPENGL = $00000002;             //*< window usable with OpenGL context */
   SDL_WINDOW_SHOWN = $00000004;              //*< window is visible */
@@ -178,7 +193,7 @@ const
   SDL_WINDOW_FOREIGN = $00000800;            //*< window not created by SDL */
 
 
-  (*SDL_RENDERER_SINGLEBUFFER = $00000001;     //*< Render directly to the window, if possible */
+  SDL_RENDERER_SINGLEBUFFER = $00000001;     //*< Render directly to the window, if possible */
   SDL_RENDERER_PRESENTCOPY = $00000002;      //*< Present uses a copy from back buffer to the front buffer */
   SDL_RENDERER_PRESENTFLIP2 = $00000004;     //*< Present uses a flip, swapping back buffer and front buffer */
   SDL_RENDERER_PRESENTFLIP3 = $00000008;     //*< Present uses a flip, rotating between two back buffers and a front buffer */
@@ -444,8 +459,6 @@ type
 
 
 {* SDL_Event type definition *}
-
-	PSDL_Window = Pointer;
 	
 	TSDL_WindowEvent = record
 		type_: byte;
@@ -552,30 +565,6 @@ type
 	PSDL_Thread = Pointer;
 	PSDL_mutex = Pointer;
 
-  PSDL_GLContext = Pointer;
-	TSDL_GLattr =
-  (
-		SDL_GL_RED_SIZE,
-		SDL_GL_GREEN_SIZE,
-		SDL_GL_BLUE_SIZE,
-		SDL_GL_ALPHA_SIZE,
-		SDL_GL_BUFFER_SIZE,
-		SDL_GL_DOUBLEBUFFER,
-		SDL_GL_DEPTH_SIZE,
-		SDL_GL_STENCIL_SIZE,
-		SDL_GL_ACCUM_RED_SIZE,
-		SDL_GL_ACCUM_GREEN_SIZE,
-		SDL_GL_ACCUM_BLUE_SIZE,
-		SDL_GL_ACCUM_ALPHA_SIZE,
-		SDL_GL_STEREO,
-		SDL_GL_MULTISAMPLEBUFFERS,
-		SDL_GL_MULTISAMPLESAMPLES,
-		SDL_GL_ACCELERATED_VISUAL,
-		SDL_GL_RETAINED_BACKING,
-		SDL_GL_CONTEXT_MAJOR_VERSION,
-		SDL_GL_CONTEXT_MINOR_VERSION
-	);
-
 	(*
 	TSDL_ArrayByteOrder = (  // array component order, low byte -> high byte 
 		SDL_ARRAYORDER_NONE,
@@ -610,6 +599,50 @@ type
     refresh_rate: Integer;
     driverdata: Pointer;
   end;
+
+  PSDL_Window = Pointer;
+
+  TSDL_WindowEventID = (
+    SDL_WINDOWEVENT_NONE,           //**< Never used */
+    SDL_WINDOWEVENT_SHOWN,          //**< Window has been shown */
+    SDL_WINDOWEVENT_HIDDEN,         //**< Window has been hidden */
+    SDL_WINDOWEVENT_EXPOSED,        //**< Window has been exposed and should be redrawn */
+    SDL_WINDOWEVENT_MOVED,          //**< Window has been moved to data1, data2 */
+    SDL_WINDOWEVENT_RESIZED,        //**< Window has been resized to data1xdata2 */
+    SDL_WINDOWEVENT_SIZE_CHANGED,   //**< The window size has changed, either as a result of an API call or through the system or user changing the window size. */
+    SDL_WINDOWEVENT_MINIMIZED,      //**< Window has been minimized */
+    SDL_WINDOWEVENT_MAXIMIZED,      //**< Window has been maximized */
+    SDL_WINDOWEVENT_RESTORED,       //**< Window has been restored to normal size and position */
+    SDL_WINDOWEVENT_ENTER,          //**< Window has gained mouse focus */
+    SDL_WINDOWEVENT_LEAVE,          //**< Window has lost mouse focus */
+    SDL_WINDOWEVENT_FOCUS_GAINED,   //**< Window has gained keyboard focus */
+    SDL_WINDOWEVENT_FOCUS_LOST,     //**< Window has lost keyboard focus */
+    SDL_WINDOWEVENT_CLOSE           //**< The window manager requests that the window be closed */
+  );
+
+  PSDL_GLContext = Pointer;
+	TSDL_GLattr =
+  (
+		SDL_GL_RED_SIZE,
+		SDL_GL_GREEN_SIZE,
+		SDL_GL_BLUE_SIZE,
+		SDL_GL_ALPHA_SIZE,
+		SDL_GL_BUFFER_SIZE,
+		SDL_GL_DOUBLEBUFFER,
+		SDL_GL_DEPTH_SIZE,
+		SDL_GL_STENCIL_SIZE,
+		SDL_GL_ACCUM_RED_SIZE,
+		SDL_GL_ACCUM_GREEN_SIZE,
+		SDL_GL_ACCUM_BLUE_SIZE,
+		SDL_GL_ACCUM_ALPHA_SIZE,
+		SDL_GL_STEREO,
+		SDL_GL_MULTISAMPLEBUFFERS,
+		SDL_GL_MULTISAMPLESAMPLES,
+		SDL_GL_ACCELERATED_VISUAL,
+		SDL_GL_RETAINED_BACKING,
+		SDL_GL_CONTEXT_MAJOR_VERSION,
+		SDL_GL_CONTEXT_MINOR_VERSION
+	);
   // End SDL_video.h
 
   // Begin SDL_render.h (Types)
